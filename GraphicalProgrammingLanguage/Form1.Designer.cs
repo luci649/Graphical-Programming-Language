@@ -28,68 +28,80 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
-            textBox1 = new TextBox();
-            pictureBox1 = new PictureBox();
-            richTextBox1 = new RichTextBox();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            RunButton = new Button();
+            SingleCommand = new TextBox();
+            OutputDisplay = new PictureBox();
+            MultiCommand = new RichTextBox();
+            SyntxButton = new Button();
+            ((System.ComponentModel.ISupportInitialize)OutputDisplay).BeginInit();
             SuspendLayout();
             // 
-            // button1
+            // RunButton
             // 
-            button1.Location = new Point(406, 71);
-            button1.Name = "button1";
-            button1.Size = new Size(112, 34);
-            button1.TabIndex = 0;
-            button1.Text = "Run";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            RunButton.Location = new Point(470, 72);
+            RunButton.Name = "RunButton";
+            RunButton.Size = new Size(112, 34);
+            RunButton.TabIndex = 0;
+            RunButton.Text = "Run";
+            RunButton.UseVisualStyleBackColor = true;
+            RunButton.Click += button1_Click;
             // 
-            // textBox1
+            // SingleCommand
             // 
-            textBox1.Location = new Point(132, 71);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(211, 31);
-            textBox1.TabIndex = 1;
+            SingleCommand.Location = new Point(132, 74);
+            SingleCommand.Name = "SingleCommand";
+            SingleCommand.Size = new Size(241, 31);
+            SingleCommand.TabIndex = 1;
             // 
-            // pictureBox1
+            // OutputDisplay
             // 
-            pictureBox1.BackColor = SystemColors.ButtonShadow;
-            pictureBox1.Location = new Point(132, 129);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(241, 186);
-            pictureBox1.TabIndex = 2;
-            pictureBox1.TabStop = false;
+            OutputDisplay.BackColor = SystemColors.ButtonShadow;
+            OutputDisplay.Location = new Point(132, 129);
+            OutputDisplay.Name = "OutputDisplay";
+            OutputDisplay.Size = new Size(241, 186);
+            OutputDisplay.TabIndex = 2;
+            OutputDisplay.TabStop = false;
             // 
-            // richTextBox1
+            // MultiCommand
             // 
-            richTextBox1.Location = new Point(492, 129);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(249, 186);
-            richTextBox1.TabIndex = 3;
-            richTextBox1.Text = "";
+            MultiCommand.Location = new Point(470, 129);
+            MultiCommand.Name = "MultiCommand";
+            MultiCommand.Size = new Size(249, 186);
+            MultiCommand.TabIndex = 3;
+            MultiCommand.Text = "";
+            // 
+            // SyntxButton
+            // 
+            SyntxButton.Location = new Point(607, 71);
+            SyntxButton.Name = "SyntxButton";
+            SyntxButton.Size = new Size(112, 34);
+            SyntxButton.TabIndex = 4;
+            SyntxButton.Text = "Syntax";
+            SyntxButton.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(richTextBox1);
-            Controls.Add(pictureBox1);
-            Controls.Add(textBox1);
-            Controls.Add(button1);
+            Controls.Add(SyntxButton);
+            Controls.Add(MultiCommand);
+            Controls.Add(OutputDisplay);
+            Controls.Add(SingleCommand);
+            Controls.Add(RunButton);
             Name = "Form1";
             Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)OutputDisplay).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private Button button1;
-        private TextBox textBox1;
-        private PictureBox pictureBox1;
-        private RichTextBox richTextBox1;
+        private Button RunButton;
+        private TextBox SingleCommand;
+        private PictureBox OutputDisplay;
+        private RichTextBox MultiCommand;
+        private Button SyntxButton;
     }
 }

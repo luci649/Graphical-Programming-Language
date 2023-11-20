@@ -11,28 +11,28 @@ namespace GraphicalProgrammingLanguage
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string[] x = richTextBox1.Text.Split("\n");
+            string[] x = MultiCommand.Text.Split("\n");
             
 
-            if (pictureBox1.Image == null)
+            if (OutputDisplay.Image == null)
             {
-                pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+                OutputDisplay.Image = new Bitmap(OutputDisplay.Width, OutputDisplay.Height);
             }
 
-            var graphics = Graphics.FromImage(pictureBox1.Image);
+            var graphics = Graphics.FromImage(OutputDisplay.Image);
 
             graphics.Clear(Color.White);
 
-            if ("circle".Equals(textBox1.Text) || "circle".Equals(richTextBox1.Text))
+            if ("circle".Equals(SingleCommand.Text) || "circle".Equals(MultiCommand.Text))
             {
                 graphics.FillEllipse(Brushes.SteelBlue, 10, 10, 100, 100);
             }
-            else if ("rectangle".Equals(textBox1.Text) || "rectangle".Equals(richTextBox1.Text))
+            else if ("rectangle".Equals(SingleCommand.Text) || "rectangle".Equals(MultiCommand.Text))
             {
                 graphics.FillRectangle(Brushes.Brown, 10, 10, 10, 20);
             }
 
-            pictureBox1.Refresh();
+            OutputDisplay.Refresh();
         }
     }
 }
