@@ -45,7 +45,7 @@ namespace GraphicalProgrammingLanguage
                 if (command.Equals("drawto")) 
                 {
                     can.DrawLine(parNums[0], parNums[1]);
-                }
+                }            
             }
         }
 

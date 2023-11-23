@@ -16,14 +16,23 @@ namespace GraphicalProgrammingLanguage
 
         private void Button1_keyDown(object sender, EventArgs e)
         {
+            pars = new Parser(OutDisplayBitmap);
+            pars.commandParser(SingleCommand.Text);
             OutputDisplay.Refresh();
         }
         private void SingleCommand_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-            {
-                pars = new Parser(OutDisplayBitmap);
-                pars.commandParser(SingleCommand.Text);
+            { pars = new Parser(OutDisplayBitmap);
+                if (SingleCommand.Text.Equals("run")) 
+                {
+                    pars.parseProgram(MultiCommand.Text);
+                }
+                else 
+                {
+                    pars.commandParser(SingleCommand.Text); 
+                }
+              
                 SingleCommand.Text = "";
                 Refresh();
             }
