@@ -1,4 +1,5 @@
 using System.Windows.Forms.VisualStyles;
+using System.IO;
 
 
 namespace GraphicalProgrammingLanguage
@@ -9,6 +10,7 @@ namespace GraphicalProgrammingLanguage
         Bitmap OutDisplayBitmap = new Bitmap(screenXsize,screenYsize);
         Parser pars;
         
+
         public Form1()
         {
             InitializeComponent();           
@@ -28,11 +30,19 @@ namespace GraphicalProgrammingLanguage
                 {
                     pars.parseProgram(MultiCommand.Text);
                 }
-                else 
+                else if (SingleCommand.Text.Equals("save"))
                 {
-                    pars.commandParser(SingleCommand.Text); 
+                    File.WriteAllText("program.txt", MultiCommand.Text);
                 }
-              
+                else if (SingleCommand.Text.Equals("load"))
+                {
+                    MultiCommand.Text = File.ReadAllText("program.txt");
+                }
+
+                else
+                {
+                    pars.commandParser(SingleCommand.Text);
+                }
                 SingleCommand.Text = "";
                 Refresh();
             }
