@@ -1,38 +1,37 @@
 using System.Windows.Forms.VisualStyles;
 
+
 namespace GraphicalProgrammingLanguage
 {
     public partial class Form1 : Form
     {
+        const int screenXsize = 241, screenYsize = 186;
+        Bitmap OutDisplayBitmap = new Bitmap(screenXsize,screenYsize);
+        Parser pars;
+        
         public Form1()
         {
-            InitializeComponent();
+            InitializeComponent();           
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_keyDown(object sender, EventArgs e)
         {
-            string[] x = MultiCommand.Text.Split("\n");
-            
-
-            if (OutputDisplay.Image == null)
-            {
-                OutputDisplay.Image = new Bitmap(OutputDisplay.Width, OutputDisplay.Height);
-            }
-
-            var graphics = Graphics.FromImage(OutputDisplay.Image);
-
-            graphics.Clear(Color.White);
-
-            if ("circle".Equals(SingleCommand.Text) || "circle".Equals(MultiCommand.Text))
-            {
-                graphics.FillEllipse(Brushes.SteelBlue, 10, 10, 100, 100);
-            }
-            else if ("rectangle".Equals(SingleCommand.Text) || "rectangle".Equals(MultiCommand.Text))
-            {
-                graphics.FillRectangle(Brushes.Brown, 10, 10, 10, 20);
-            }
-
             OutputDisplay.Refresh();
+        }
+        private void SingleCommand_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                pars = new Parser(OutDisplayBitmap);
+                pars.commandParser(SingleCommand.Text);
+                SingleCommand.Text = "";
+                Refresh();
+            }
+        }
+         private void OutputDisplay_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            g.DrawImageUnscaled(OutDisplayBitmap, 0,0);
         }
     }
 }

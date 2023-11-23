@@ -44,7 +44,7 @@
             RunButton.TabIndex = 0;
             RunButton.Text = "Run";
             RunButton.UseVisualStyleBackColor = true;
-            RunButton.Click += button1_Click;
+            RunButton.Click += Button1_keyDown;
             // 
             // SingleCommand
             // 
@@ -52,15 +52,17 @@
             SingleCommand.Name = "SingleCommand";
             SingleCommand.Size = new Size(241, 31);
             SingleCommand.TabIndex = 1;
+            SingleCommand.KeyDown += SingleCommand_KeyDown;
             // 
             // OutputDisplay
             // 
-            OutputDisplay.BackColor = SystemColors.ButtonShadow;
+            OutputDisplay.BackColor = SystemColors.Window;
             OutputDisplay.Location = new Point(132, 129);
             OutputDisplay.Name = "OutputDisplay";
             OutputDisplay.Size = new Size(241, 186);
             OutputDisplay.TabIndex = 2;
             OutputDisplay.TabStop = false;
+            OutputDisplay.Paint += OutputDisplay_Paint;
             // 
             // MultiCommand
             // 
