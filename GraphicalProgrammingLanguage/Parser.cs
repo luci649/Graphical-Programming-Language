@@ -11,7 +11,6 @@ namespace GraphicalProgrammingLanguage
 {
     class Parser : Form1
     {
-
         Bitmap g;
         Canvas can;
         Boolean d;
@@ -85,8 +84,7 @@ namespace GraphicalProgrammingLanguage
                         {
                             System.InvalidOperationException arg = new System.InvalidOperationException("missing input");
                             throw arg;
-                        }
-                        
+                        }                        
                     }
                     else if (command.Equals("circle"))
                     {                        

@@ -27,15 +27,8 @@ namespace GraphicalProgrammingLanguage
         /// <exception cref="ArgumentOutOfRangeException">This is thrown if one of the axes is outside of given range.</exception>
         public void MoveTo(int toX, int toY)
         {
-            if ((toX >= 0 && 300 >= toX) || (toY >= 0 && 300 >= toY))
-            {
-                xpos = toX;
-                ypos = toY;
-            }
-            else
-            {
-                throw new ArgumentOutOfRangeException("x or y axis");
-            }
+            xpos = toX;
+            ypos = toY;
         }
         /// <summary>
         /// Allows for a line to be drawn from current position.

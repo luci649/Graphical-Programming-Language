@@ -57,6 +57,14 @@ namespace GraphicalProgrammingLanguage
                     {
                         MultiCommand.Text = "invalid entry";
                     }
+                    catch (ArgumentOutOfRangeException)
+                    {
+                        MultiCommand.Text = "wrong parameter";
+                    }
+                    catch (ArgumentNullException)
+                    {
+                        MultiCommand.Text = "wrong command";
+                    }
                 }
                 else if (SingleCommand.Text.Equals("save"))
                 {
@@ -109,8 +117,6 @@ namespace GraphicalProgrammingLanguage
             {
                 MultiCommand.Text = "wrong parameter";
             }
-        }
-
-        
+        }        
     }
 }
