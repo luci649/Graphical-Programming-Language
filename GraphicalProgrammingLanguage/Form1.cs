@@ -21,23 +21,45 @@ namespace GraphicalProgrammingLanguage
             pars.commandParser(x);
         }
         private void RunButton_keyDown(object sender, EventArgs e)
-        {   
+        {
             pars = new Parser(OutDisplayBitmap);
-            try
+            if (SingleCommand.Text != "")
             {
-                pars.commandParser(SingleCommand.Text);
+                try
+                {
+                    pars.commandParser(SingleCommand.Text);
+                }
+                catch (InvalidOperationException)
+                {
+                    MultiCommand.Text = "invalid entry";
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    MultiCommand.Text = "wrong parameter";
+                }
+                catch (ArgumentNullException)
+                {
+                    MultiCommand.Text = "wrong command";
+                }
             }
-            catch (InvalidOperationException)
+            else if (MultiCommand.Text != "")
             {
-                MultiCommand.Text = "invalid entry";
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                MultiCommand.Text = "wrong parameter";
-            }
-            catch (ArgumentNullException)
-            {
-                MultiCommand.Text = "wrong command";
+                try
+                {
+                    pars.parseProgram(MultiCommand.Text);
+                }
+                catch (InvalidOperationException)
+                {
+                    MultiCommand.Text = "invalid entry";
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    MultiCommand.Text = "wrong parameter";
+                }
+                catch (ArgumentNullException)
+                {
+                    MultiCommand.Text = "wrong command";
+                }
             }
             Refresh();
         }
@@ -117,6 +139,6 @@ namespace GraphicalProgrammingLanguage
             {
                 MultiCommand.Text = "wrong parameter";
             }
-        }        
+        }
     }
 }
