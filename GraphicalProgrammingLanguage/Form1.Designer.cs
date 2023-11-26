@@ -44,7 +44,7 @@
             RunButton.TabIndex = 0;
             RunButton.Text = "Run";
             RunButton.UseVisualStyleBackColor = true;
-            RunButton.Click += Button1_keyDown;
+            RunButton.Click += RunButton_keyDown;
             // 
             // SingleCommand
             // 
@@ -80,6 +80,7 @@
             SyntxButton.TabIndex = 4;
             SyntxButton.Text = "Syntax";
             SyntxButton.UseVisualStyleBackColor = true;
+            SyntxButton.Click += SyntxButton_Click;
             // 
             // Form1
             // 
