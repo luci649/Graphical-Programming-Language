@@ -20,6 +20,13 @@ namespace GraphicalProgrammingLanguage
             this.g = bIn;
             can = new Canvas(Graphics.FromImage(bIn));
         }
+        /// <summary>
+        /// Takes in commands entered in by users and determines if it contains valid commands or/and parameters to then execute the right
+        /// method to draw on the display.
+        /// </summary>
+        /// <param name="x">commands and/or parameters entered by user.</param>
+        /// <exception cref="System.ArgumentOutOfRangeException">This exception is thrown if the wrong command is enter.</exception>
+        /// <exception cref="System.ArgumentNullException">This exception is thrown if the wrong parameter is enter.</exception>
         public void commandParser(string x)
         {
             x = x.ToLower().Trim();
@@ -33,6 +40,10 @@ namespace GraphicalProgrammingLanguage
                 String command = commands[0];
 
                 String[] pars = commands[1].Split(",");
+                if (pars.Length > 2)
+                {
+                    throw new System.ArgumentOutOfRangeException("invalid parameter");
+                }
 
                 parNums = new int[pars.Length];
 
@@ -117,6 +128,10 @@ namespace GraphicalProgrammingLanguage
                             throw arg;
                         }
                     }
+                    else
+                    {
+                        throw new System.ArgumentNullException("invalid command");
+                    }
                 }
                 else if (d == false)
                 {
@@ -165,6 +180,11 @@ namespace GraphicalProgrammingLanguage
                 throw new System.ArgumentNullException("invalid command");
             }
         }
+        /// <summary>
+        /// Parses through multiple lines of commands passed through the rich text box by splitting them at their new lines and then have 
+        /// each line's individual corresponding method executed one at a time.
+        /// </summary>
+        /// <param name="input">A string of different commands.</param>
         public void parseProgram(string input)
         {
             String[] lines = input.Split("\n");

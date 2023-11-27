@@ -46,18 +46,18 @@ namespace GraphicalProgrammingLanguage
         /// </summary>
         /// <param name="width">provides the width of rectangle.</param>
         /// <param name="length">provides the length of rectangle.</param>
-        public void DrawRectangle(int length, int width)
+        public void DrawRectangle(int width, int length)
         {
-            g.DrawRectangle(p, xpos, ypos, ypos + length, xpos + width);
+            g.DrawRectangle(p, xpos, ypos, xpos + width, ypos + length);
         }
         /// <summary>
         /// Draws a rectangle but not as an outline.
         /// </summary>
         /// <param name="length">provides the length of rectangle.</param>
         /// <param name="width">provides the width of rectangle.</param>
-        public void DrawRectangleFill(int length, int width)
+        public void DrawRectangleFill(int width, int length)
         {
-            g.FillRectangle(b, xpos, ypos, ypos + length, xpos + width);
+            g.FillRectangle(b, xpos, ypos, xpos + width, ypos + length);
         }
         /// <summary>
         /// Draws a circle based on the radius passed to it.

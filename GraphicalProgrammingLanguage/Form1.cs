@@ -54,7 +54,7 @@ namespace GraphicalProgrammingLanguage
                 }
                 catch (ArgumentOutOfRangeException)
                 {
-                    MultiCommand.Text = "wrong parameter";
+                    MultiCommand.Text = "to many parameters";
                 }
                 catch (ArgumentNullException)
                 {
