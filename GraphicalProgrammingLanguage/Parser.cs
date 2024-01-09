@@ -18,6 +18,10 @@ namespace GraphicalProgrammingLanguage
         Boolean d;
         Boolean fill = false;
 
+        /// <summary>
+        /// Takes the canvas context to make the right drawing calls.
+        /// </summary>
+        /// <param name="bIn">The canvas context.</param>
         public Parser(Canvas bIn)
         {
             this.can = bIn;

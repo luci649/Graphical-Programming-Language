@@ -53,8 +53,8 @@ namespace GraphicalProgrammingLanguage
         /// <summary>
         /// Set the position of the pen and therefore the point where it will draw from.
         /// </summary>
-        /// <param name="toX"></param>
-        /// <param name="toY"></param>
+        /// <param name="toX">This is represents the X axis of where the pen is.</param>
+        /// <param name="toY">This is represents the X axis of where the pen is.</param>
         /// <exception cref="ArgumentOutOfRangeException">This is thrown if one of the axes is outside of given range.</exception>
         public void MoveTo(int toX, int toY)
         {

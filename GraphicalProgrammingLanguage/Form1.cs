@@ -15,6 +15,9 @@ namespace GraphicalProgrammingLanguage
         Bitmap PointerBitmap = new Bitmap(screenXsize, screenYsize);
         Bitmap OutDisplayBitmap = new Bitmap(screenXsize, screenYsize);
         
+        /// <summary>
+        /// Sets up form and bitmaps to draw on to then be displayed on form.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
