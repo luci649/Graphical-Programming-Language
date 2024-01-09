@@ -31,17 +31,17 @@ namespace GraphicalProgrammingLanguage
                 {
                     pars.CommandParser(SingleCommand.Text);
                 }
-                catch (InvalidOperationException)
+                catch (ArgumentOutOfRangeException)
                 {
-                    MultiCommand.Text = "invalid entry";
-                }
-                catch (ArgumentOutOfRangeException ex)
-                {
-                    MultiCommand.Text = ex.Message;
+                    MultiCommand.Text = "to many parameters entered";
                 }
                 catch (ArgumentNullException)
                 {
-                    MultiCommand.Text = "wrong command\n";
+                    MultiCommand.Text = "Invalid command entered";
+                }
+                catch (InvalidOperationException)
+                {
+                    MultiCommand.Text = "missing parameter or X or Y position is outside of range of display";
                 }
             }
             else if (MultiCommand.Text != "")
@@ -50,17 +50,17 @@ namespace GraphicalProgrammingLanguage
                 {
                     pars.ParseProgram(MultiCommand.Text);
                 }
-                catch (InvalidOperationException)
-                {
-                    MultiCommand.Text = "invalid entry";
-                }
                 catch (ArgumentOutOfRangeException)
                 {
-                    MultiCommand.Text = "to many parameters";
+                    MultiCommand.Text = "to many parameters entered";
                 }
                 catch (ArgumentNullException)
                 {
-                    MultiCommand.Text = "wrong command";
+                    MultiCommand.Text = "Invalid command entered";
+                }
+                catch (InvalidOperationException)
+                {
+                    MultiCommand.Text = "missing parameter or X or Y position is outside of range of display";
                 }
             }
             Refresh();
@@ -76,17 +76,17 @@ namespace GraphicalProgrammingLanguage
                     {
                         pars.ParseProgram(MultiCommand.Text);
                     }
-                    catch (InvalidOperationException)
-                    {
-                        MultiCommand.Text = "invalid entry";
-                    }
                     catch (ArgumentOutOfRangeException)
                     {
-                        MultiCommand.Text = "wrong parameter";
+                        MultiCommand.Text = "to many parameters entered";
                     }
-                    catch (ArgumentNullException ex)
+                    catch (ArgumentNullException)
                     {
-                        MultiCommand.Text = ex.Message;
+                        MultiCommand.Text = "Invalid command entered";
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        MultiCommand.Text = "missing parameter or X or Y position is outside of range of display";
                     }
                 }
                 else if (SingleCommand.Text.Equals("save"))
@@ -105,15 +105,15 @@ namespace GraphicalProgrammingLanguage
                     }
                     catch (ArgumentOutOfRangeException)
                     {
-                        MultiCommand.Text = "wrong parameter";
+                        MultiCommand.Text = "to many parameters entered";
                     }
-                    catch (ArgumentNullException g)
+                    catch (ArgumentNullException)
                     {
-                        MultiCommand.Text = g.Message;
+                        MultiCommand.Text = "Invalid command entered";
                     }
                     catch (InvalidOperationException)
                     {
-                        MultiCommand.Text = "invalid entry";
+                        MultiCommand.Text = "missing parameter or X or Y position is outside of range of display";
                     }
                 }
                 SingleCommand.Text = "";
@@ -134,11 +134,15 @@ namespace GraphicalProgrammingLanguage
             }
             catch (ArgumentOutOfRangeException)
             {
-                MultiCommand.Text = "wrong command";
+                MultiCommand.Text = "to many parameters entered";
             }
             catch (ArgumentNullException)
             {
-                MultiCommand.Text = "wrong parameter";
+                MultiCommand.Text = "Invalid command entered";
+            }
+            catch (InvalidOperationException)
+            {
+                MultiCommand.Text = "missing parameter or X or Y position is outside of range of display";
             }
         }         
     }
