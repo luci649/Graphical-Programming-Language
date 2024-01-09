@@ -11,12 +11,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("GraphicalProgrammingLanguage")]
-[assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("GraphicalProgrammingLanguageTest")]
+[assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+69034a95d532aa8da18d11752ffaf483c34f02c5")]
-[assembly: System.Reflection.AssemblyProductAttribute("GraphicalProgrammingLanguage")]
-[assembly: System.Reflection.AssemblyTitleAttribute("GraphicalProgrammingLanguage")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyProductAttribute("GraphicalProgrammingLanguageTest")]
+[assembly: System.Reflection.AssemblyTitleAttribute("GraphicalProgrammingLanguageTest")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 [assembly: System.Runtime.Versioning.TargetPlatformAttribute("Windows7.0")]
 [assembly: System.Runtime.Versioning.SupportedOSPlatformAttribute("Windows7.0")]

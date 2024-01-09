@@ -93,7 +93,7 @@
             Controls.Add(SingleCommand);
             Controls.Add(RunButton);
             Name = "Form1";
-            Text = "Form1";
+            Text = "Graphical Programming Language";
             ((System.ComponentModel.ISupportInitialize)OutputDisplay).EndInit();
             ResumeLayout(false);
             PerformLayout();

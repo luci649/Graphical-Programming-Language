@@ -9,17 +9,20 @@ using GraphicalProgrammingLanguage;
 
 namespace GraphicalProgrammingLanguage
 {
-    class Parser : Form1
+    /// <summary>
+    /// This class is for sorting through user input to call the right commands.
+    /// </summary>
+    public class Parser
     {
-        Bitmap g;
         Canvas can;
         Boolean d;
         Boolean fill = false;
-        public Parser(Bitmap bIn)
+
+        public Parser(Canvas bIn)
         {
-            this.g = bIn;
-            can = new Canvas(Graphics.FromImage(bIn));
+            this.can = bIn;
         }
+
         /// <summary>
         /// Takes in commands entered in by users and determines if it contains valid commands or/and parameters to then execute the right
         /// method to draw on the display.
@@ -27,7 +30,7 @@ namespace GraphicalProgrammingLanguage
         /// <param name="x">commands and/or parameters entered by user.</param>
         /// <exception cref="System.ArgumentOutOfRangeException">This exception is thrown if the wrong command is enter.</exception>
         /// <exception cref="System.ArgumentNullException">This exception is thrown if the wrong parameter is enter.</exception>
-        public void commandParser(string x)
+        public void CommandParser(string x)
         {
             x = x.ToLower().Trim();
 
@@ -42,7 +45,7 @@ namespace GraphicalProgrammingLanguage
                 String[] pars = commands[1].Split(",");
                 if (pars.Length > 2)
                 {
-                    throw new System.ArgumentOutOfRangeException("invalid parameter");
+                    throw new System.ArgumentOutOfRangeException("to many parameters entered");
                 }
 
                 parNums = new int[pars.Length];
@@ -60,11 +63,11 @@ namespace GraphicalProgrammingLanguage
                         {
                             can.DrawLine(parNums[0], parNums[1]);
                         }
-                        catch (IndexOutOfRangeException) 
+                        catch (IndexOutOfRangeException)
                         {
-                            System.InvalidOperationException arg = new System.InvalidOperationException("missing input");
+                            System.InvalidOperationException arg = new System.InvalidOperationException("missing parameter or X or Y position is outside of range of display");
                             throw arg;
-                        }                        
+                        }
                     }
                     else if (command.Equals("moveto"))
                     {
@@ -74,9 +77,9 @@ namespace GraphicalProgrammingLanguage
                         }
                         catch (IndexOutOfRangeException)
                         {
-                            System.InvalidOperationException arg = new System.InvalidOperationException("missing input");
+                            System.InvalidOperationException arg = new InvalidOperationException("missing parameter or X or Y position is outside of range of display");
                             throw arg;
-                        }                        
+                        }
                     }
                     else if (command.Equals("rectangle"))
                     {
@@ -93,12 +96,12 @@ namespace GraphicalProgrammingLanguage
                         }
                         catch (IndexOutOfRangeException)
                         {
-                            System.InvalidOperationException arg = new System.InvalidOperationException("missing input");
+                            System.InvalidOperationException arg = new System.InvalidOperationException("missing parameter or X or Y position is outside of range of display");
                             throw arg;
-                        }                        
+                        }
                     }
                     else if (command.Equals("circle"))
-                    {                        
+                    {
                         try
                         {
                             if (fill == false)
@@ -112,25 +115,25 @@ namespace GraphicalProgrammingLanguage
                         }
                         catch (IndexOutOfRangeException)
                         {
-                            System.InvalidOperationException arg = new System.InvalidOperationException("missing input");
+                            System.InvalidOperationException arg = new System.InvalidOperationException("missing parameter or X or Y position is outside of range of display");
                             throw arg;
                         }
                     }
                     else if (command.Equals("triangle"))
-                    {                       
+                    {
                         try
                         {
                             can.DrawTriangle(parNums[0]);
                         }
                         catch (IndexOutOfRangeException)
                         {
-                            System.InvalidOperationException arg = new System.InvalidOperationException("missing input");
+                            System.InvalidOperationException arg = new System.InvalidOperationException("missing parameter or X or Y position is outside of range of display");
                             throw arg;
                         }
                     }
                     else
                     {
-                        throw new System.ArgumentNullException("invalid command");
+                        throw new ArgumentNullException("Invalid command entered");
                     }
                 }
                 else if (d == false)
@@ -163,7 +166,7 @@ namespace GraphicalProgrammingLanguage
                     }
                     else
                     {
-                        throw new System.ArgumentOutOfRangeException("invalid parameter");
+                        throw new ArgumentOutOfRangeException("invalid parameter");
                     }
                 }
             }
@@ -174,10 +177,10 @@ namespace GraphicalProgrammingLanguage
             else if (commands[0].Equals("reset"))
             {
                 can.Reset();
-            }
+            }           
             else
             {
-                throw new System.ArgumentNullException("invalid command");
+                throw new ArgumentNullException("Invalid command entered");
             }
         }
         /// <summary>
@@ -185,13 +188,21 @@ namespace GraphicalProgrammingLanguage
         /// each line's individual corresponding method executed one at a time.
         /// </summary>
         /// <param name="input">A string of different commands.</param>
-        public void parseProgram(string input)
+        public void ParseProgram(string input)
         {
             String[] lines = input.Split("\n");
             foreach (String line in lines)
             {
-                commandParser(line);                
+                CommandParser(line);
             }
+        }
+
+        /// <summary>
+        /// Property for testing if is currently on or not.
+        /// </summary>
+        public Boolean Fill 
+        {
+            get {  return fill; }
         }
     }
 }
