@@ -147,12 +147,24 @@ namespace GraphicalProgrammingLanguageTest
 
             //Act
             test.DrawLine(20,50);
-            test.Clear();
-            test.DrawCircle(40);
 
             //Arrange
             int x = test.Xpos;
             int y = test.Ypos;
+
+            //Assert
+            Assert.AreEqual(50, y);
+            Assert.AreEqual(20, x);
+            Assert.AreNotEqual(50, x);
+            Assert.AreNotEqual(20, y);
+
+            //Act
+            test.Clear();
+            test.DrawCircle(40);
+
+            //Arrange
+            x = test.Xpos;
+            y = test.Ypos;
 
             //Assert
             Assert.AreEqual(50, y);
