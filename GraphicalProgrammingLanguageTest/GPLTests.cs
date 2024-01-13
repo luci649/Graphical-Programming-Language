@@ -281,6 +281,31 @@ namespace GraphicalProgrammingLanguageTest
 
             //Assert
             Assert.AreEqual(Color.Red,test.PenColour);
-        }       
+        }
+
+        /// <summary>
+        /// Testing declaring a variable, multiple variables and throwing an exception when a pervious is declared again.
+        /// </summary>
+        [TestMethod]
+        public void TestVariableDeclare() 
+        {
+            //Arrange
+            Canvas test = new();
+            Parser p = new Parser(test);
+
+            //Act
+            p.CommandParser("var x");
+
+            //Assert
+            Assert.AreEqual(0, p.variableSearch("x"));           
+            Assert.ThrowsException<System.ArgumentOutOfRangeException>(() => p.CommandParser("var x"));
+
+            //Act
+            p.ParseProgram("var a\nvar b");
+
+            //Assert
+            Assert.AreEqual(1, p.variableSearch("a"));
+            Assert.AreEqual(2, p.variableSearch("b"));
+        }
     }
 }

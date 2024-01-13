@@ -18,9 +18,9 @@ namespace GraphicalProgrammingLanguage
         Canvas can;
         Boolean d;
         Boolean fill = false;
-        int varibleCount = 0;
-        ArrayList varibles = new ArrayList();
-        ArrayList varibleValues = new ArrayList();
+        int variableCount = 0;
+        ArrayList variables = new ArrayList();
+        ArrayList variableValues = new ArrayList();
 
         /// <summary>
         /// Takes the canvas context to make the right drawing calls.
@@ -51,10 +51,10 @@ namespace GraphicalProgrammingLanguage
                 String command = commands[0];
 
                 String[] pars = commands[1].Split(",");
-                //if (pars.Length > 2)
-                //{
-                //    throw new System.ArgumentOutOfRangeException("to many parameters entered");
-                //}
+                if (pars.Length > 2)
+                {
+                    throw new System.ArgumentOutOfRangeException("to many parameters entered");
+                }
 
                 parNums = new int[pars.Length];
 
@@ -174,15 +174,15 @@ namespace GraphicalProgrammingLanguage
                     }
                     else if (command.Equals("var"))
                     {
-                        if (varibleSearch(pars[0]) >= 0)
+                        if (variableSearch(pars[0]) >= 0)
                         {
-                            throw new ArgumentOutOfRangeException("varible all ready declared");
+                            throw new ArgumentOutOfRangeException("variable already declared");
                         }
                         else
                         {
-                            varibles.Add(pars[0]);
-                            varibleValues.Add(0);
-                            varibleCount++;
+                            variables.Add(pars[0]);
+                            variableValues.Add(0);
+                            variableCount++;
                         }
                     }             
                     else
@@ -226,11 +226,16 @@ namespace GraphicalProgrammingLanguage
             get {  return fill; }
         }
         
-        public int varibleSearch(String var) 
+        /// <summary>
+        /// This method is used to search the list of variables to determine if it is in the list of variables.
+        /// </summary>
+        /// <param name="var">variable that is being searched for.</param>
+        /// <returns>Either the index of the passed variable or -1 if not found.</returns>
+        public int variableSearch(String var) 
         {
-            for (int i = 0; i < varibleCount; i++) 
+            for (int i = 0; i < variableCount; i++) 
             {
-                if (varibles[i] == var)
+                if (variables[i].Equals(var))
                 {
                     return i;
                 }
