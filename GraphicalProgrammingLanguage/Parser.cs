@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Intrinsics.X86;
@@ -17,6 +18,9 @@ namespace GraphicalProgrammingLanguage
         Canvas can;
         Boolean d;
         Boolean fill = false;
+        int varibleCount = 0;
+        ArrayList varibles = new ArrayList();
+        ArrayList varibleValues = new ArrayList();
 
         /// <summary>
         /// Takes the canvas context to make the right drawing calls.
@@ -47,10 +51,10 @@ namespace GraphicalProgrammingLanguage
                 String command = commands[0];
 
                 String[] pars = commands[1].Split(",");
-                if (pars.Length > 2)
-                {
-                    throw new System.ArgumentOutOfRangeException("to many parameters entered");
-                }
+                //if (pars.Length > 2)
+                //{
+                //    throw new System.ArgumentOutOfRangeException("to many parameters entered");
+                //}
 
                 parNums = new int[pars.Length];
 
@@ -168,6 +172,19 @@ namespace GraphicalProgrammingLanguage
                             can.Pen("blue");
                         }
                     }
+                    else if (command.Equals("var"))
+                    {
+                        if (varibleSearch(pars[0]) >= 0)
+                        {
+                            throw new ArgumentOutOfRangeException("varible all ready declared");
+                        }
+                        else
+                        {
+                            varibles.Add(pars[0]);
+                            varibleValues.Add(0);
+                            varibleCount++;
+                        }
+                    }             
                     else
                     {
                         throw new ArgumentOutOfRangeException("invalid parameter");
@@ -207,6 +224,18 @@ namespace GraphicalProgrammingLanguage
         public Boolean Fill 
         {
             get {  return fill; }
+        }
+        
+        public int varibleSearch(String var) 
+        {
+            for (int i = 0; i < varibleCount; i++) 
+            {
+                if (varibles[i] == var)
+                {
+                    return i;
+                }
+            }
+            return -1;
         }
     }
 }

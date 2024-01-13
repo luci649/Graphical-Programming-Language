@@ -259,7 +259,7 @@ namespace GraphicalProgrammingLanguageTest
             //Assert
             Assert.IsFalse(p.Fill);
 
-            //Actt
+            //Act
             p.CommandParser("fill on");
             p.CommandParser("circle 20");
 

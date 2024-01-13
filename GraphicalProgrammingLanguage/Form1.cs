@@ -4,7 +4,7 @@ using System.IO;
 
 namespace GraphicalProgrammingLanguage
 {
-    
+
     public partial class Form1 : Form
     {
         const int screenXsize = 241, screenYsize = 186;
@@ -15,6 +15,7 @@ namespace GraphicalProgrammingLanguage
         Bitmap PointerBitmap = new Bitmap(screenXsize, screenYsize);
         Bitmap OutDisplayBitmap = new Bitmap(screenXsize, screenYsize);
         
+
         /// <summary>
         /// Sets up form and bitmaps to draw on to then be displayed on form.
         /// </summary>
@@ -27,7 +28,7 @@ namespace GraphicalProgrammingLanguage
         }
         private void RunButton_keyDown(object sender, EventArgs e)
         {
-            
+
             if (SingleCommand.Text != "")
             {
                 try
@@ -147,6 +148,8 @@ namespace GraphicalProgrammingLanguage
             {
                 MultiCommand.Text = "missing parameter or X or Y position is outside of range of display";
             }
-        }         
+        }
+
+        
     }
 }

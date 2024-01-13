@@ -41,7 +41,7 @@ namespace GraphicalProgrammingLanguage
         }
 
         /// <summary>
-        /// Constuctor for unit testing to avoid drawing anything.
+        /// Constructor for unit testing to avoid drawing anything.
         /// </summary>
         public Canvas()
         {
@@ -94,7 +94,7 @@ namespace GraphicalProgrammingLanguage
         }
 
         /// <summary>
-        /// Draws a rectangle based on the width and length pased to it.
+        /// Draws a rectangle based on the width and length passed to it.
         /// </summary>
         /// <param name="width">provides the width of rectangle.</param>
         /// <param name="length">provides the length of rectangle.</param>
