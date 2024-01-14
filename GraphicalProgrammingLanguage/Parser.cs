@@ -49,8 +49,9 @@ namespace GraphicalProgrammingLanguage
             if (commands.Length > 1)
             {
                 String command = commands[0];
-
+                               
                 String[] pars = commands[1].Split(",");
+
                 if (pars.Length > 2)
                 {
                     throw new System.ArgumentOutOfRangeException("to many parameters entered");
@@ -184,7 +185,20 @@ namespace GraphicalProgrammingLanguage
                             variableValues.Add(0);
                             variableCount++;
                         }
-                    }             
+                    }
+                    else if (pars[0].Equals("="))
+                    {
+                        int dex = variableSearch(command);
+                        if (dex >= 0)
+                        {
+                            variables[dex] = command;
+                            variableValues[dex] = commands[2];
+                        }
+                        else
+                        { 
+                            throw new ArgumentNullException("variable not declared"); 
+                        }
+                    }
                     else
                     {
                         throw new ArgumentOutOfRangeException("invalid parameter");
