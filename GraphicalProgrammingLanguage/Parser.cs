@@ -267,7 +267,7 @@ namespace GraphicalProgrammingLanguage
             }
             else if (commands[0].Equals("endif"))
             {
-                if (runCommand == false)
+                if (runCommand != false)
                 {
                     return;
                 }

@@ -309,14 +309,24 @@ namespace GraphicalProgrammingLanguageTest
         }
 
         [TestMethod]
-        public void TestVariableSetting()
+        public void TestIfStatements()
         {
+            //Arrange
             Canvas test = new();
             Parser p = new Parser(test);
 
-            p.ParseProgram("var x\nx = 2");
-            
-            
+            //Act
+            p.ParseProgram("var x\nvar a\nx = 3\na = 5\nif a < x\ndrawto 50,30\nendif\ndrawto 90,70");
+
+            //Arrange
+            int x = test.Xpos;
+            int y = test.Ypos;
+
+            //Assert
+            Assert.AreEqual(90,x);
+            Assert.AreEqual(70, y);
+            Assert.AreNotEqual(50, x);
+            Assert.AreNotEqual(30, y);
         }
     }
 }
