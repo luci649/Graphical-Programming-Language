@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Runtime.Intrinsics.X86;
 using System.Text;
@@ -18,6 +19,7 @@ namespace GraphicalProgrammingLanguage
         Canvas can;
         Boolean d;
         Boolean fill = false;
+        Boolean runCommand = true;
         int variableCount = 0;
         ArrayList variables = new ArrayList();
         ArrayList variableValues = new ArrayList();
@@ -48,6 +50,10 @@ namespace GraphicalProgrammingLanguage
 
             if (commands.Length > 1)
             {
+                if (runCommand == false)
+                {
+                    return;
+                }
                 String command = commands[0];
                                
                 String[] pars = commands[1].Split(",");
@@ -68,6 +74,7 @@ namespace GraphicalProgrammingLanguage
                 {
                     if (command.Equals("drawto"))
                     {
+
                         try
                         {
                             can.DrawLine(parNums[0], parNums[1]);
@@ -188,6 +195,21 @@ namespace GraphicalProgrammingLanguage
                     }
                     else if (pars[0].Equals("="))
                     {
+                        if (commands.Contains("+") || commands.Contains("-") || commands.Contains("%") || commands.Contains("/") || commands.Contains("*"))
+                        {
+                            int conInt1 = variableSearch(commands[2]);
+                            string conStr1 = (string)variableValues[conInt1];
+                            string expression = conStr1 + commands[3] + commands[4];
+                            var dt = new DataTable();
+                            try 
+                            {
+                                variableValues[conInt1] = dt.Compute(expression, ""); 
+                            }
+                            catch(System.Data.EvaluateException) 
+                            {
+                                throw new ApplicationException("invalid expression");
+                            }
+                        }
                         int dex = variableSearch(command);
                         if (dex >= 0)
                         {
@@ -199,6 +221,28 @@ namespace GraphicalProgrammingLanguage
                             throw new ArgumentNullException("variable not declared"); 
                         }
                     }
+                    else if (command.Equals("if"))
+                    {
+                        int conInt1 = variableSearch(commands[1]);
+                        int conInt2 = variableSearch(commands[3]);
+                        string conStr1 = (string)variableValues[conInt1];
+                        string conStr2 = (string)variableValues[conInt2];
+                        string condition = conStr1 + commands[2] + conStr2;
+                        var dt = new DataTable();
+                        try 
+                        {
+                            var conF = dt.Compute(condition, "");
+                            if (conF.Equals(false))
+                            {
+                                runCommand = false;                               
+                            }
+                        }
+                        catch(System.Data.EvaluateException) 
+                        {
+                            throw new ApplicationException("invalid expression");
+                        }                      
+
+                    }                    
                     else
                     {
                         throw new ArgumentOutOfRangeException("invalid parameter");
@@ -207,12 +251,28 @@ namespace GraphicalProgrammingLanguage
             }
             else if (commands[0].Equals("clear"))
             {
+                if (runCommand == false)
+                {
+                    return;
+                }
                 can.Clear();
             }
             else if (commands[0].Equals("reset"))
             {
+                if (runCommand == false)
+                {
+                    return;
+                }
                 can.Reset();
-            }           
+            }
+            else if (commands[0].Equals("endif"))
+            {
+                if (runCommand == false)
+                {
+                    return;
+                }
+                runCommand = true;
+            }
             else
             {
                 throw new ArgumentNullException("Invalid command entered");

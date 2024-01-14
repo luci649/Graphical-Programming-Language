@@ -307,5 +307,16 @@ namespace GraphicalProgrammingLanguageTest
             Assert.AreEqual(1, p.variableSearch("a"));
             Assert.AreEqual(2, p.variableSearch("b"));
         }
+
+        [TestMethod]
+        public void TestVariableSetting()
+        {
+            Canvas test = new();
+            Parser p = new Parser(test);
+
+            p.ParseProgram("var x\nx = 2");
+            
+            
+        }
     }
 }
