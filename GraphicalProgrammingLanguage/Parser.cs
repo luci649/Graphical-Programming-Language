@@ -27,7 +27,8 @@ namespace GraphicalProgrammingLanguage
         int variableCount, programCounter, loopCounter, loopSize, iterations,dex1, dex2, methodCounter, saveProgramCounter;
         ArrayList variables = new ArrayList();
         ArrayList variableValues = new ArrayList();
-        ArrayList programs = new ArrayList();
+        ArrayList methodNames = new ArrayList();
+        ArrayList methodPoint = new ArrayList();
 
         /// <summary>
         /// Takes the canvas context to make the right drawing calls.
@@ -55,7 +56,7 @@ namespace GraphicalProgrammingLanguage
 
             if (commands.Length > 1)
             {
-                if (runCommand == false)
+                if (runCommand == false || methodFlag == true)
                 {
                     return;
                 }
@@ -313,7 +314,31 @@ namespace GraphicalProgrammingLanguage
                     }
                     else if (command.Equals("method"))
                     {
-                        
+                        if (methodSearch(pars[0]) >= 0)
+                        {
+                            throw new ArgumentOutOfRangeException("method already declared");
+                        }
+                        else
+                        {
+                            methodNames.Add(pars[0]);
+                            methodPoint.Add(programCounter);
+                            methodCounter++;
+                            methodFlag = true;
+                        }
+                    }
+                    else if (command.Equals("call"))
+                    {
+                        dex1 = methodSearch(pars[0]);
+                        if (dex1 >= 0)
+                        {
+                            saveProgramCounter = programCounter + 1;
+                            programCounter = (int)methodPoint[dex1];
+                            methodExecute = true;
+                        }
+                        else
+                        {
+                            throw new ApplicationException("invalid method");
+                        }
                     }
                     else
                     {
@@ -337,12 +362,25 @@ namespace GraphicalProgrammingLanguage
                 }
                 can.Reset();
             }
+            else if (commands[0].Equals("endmethod"))
+            {
+                if (methodExecute == false)
+                {
+                    methodFlag = false;
+                }
+                else
+                {
+                    methodExecute = false;
+                    programCounter = saveProgramCounter;
+                }
+            }
             else if (commands[0].Equals("endif"))
             {
                 if (runCommand != false)
                 {
                     return;
                 }
+
                 runCommand = true;
             }
             else if (commands[0].Equals("endloop"))
@@ -393,6 +431,18 @@ namespace GraphicalProgrammingLanguage
             for (int i = 0; i < variableCount; i++) 
             {
                 if (variables[i].Equals(var))
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        public int methodSearch(String meth)
+        {
+            for (int i = 0; i < methodCounter; i++)
+            {
+                if (methodNames[i].Equals(meth))
                 {
                     return i;
                 }

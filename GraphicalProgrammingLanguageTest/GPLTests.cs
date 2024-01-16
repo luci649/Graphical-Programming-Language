@@ -332,6 +332,9 @@ namespace GraphicalProgrammingLanguageTest
             Assert.AreNotEqual(30, y);
         }
 
+        /// <summary>
+        /// Testing functionality of loop command.
+        /// </summary>
         [TestMethod]
         public void TestLoop() 
         {
