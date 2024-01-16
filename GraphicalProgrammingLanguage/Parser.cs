@@ -19,17 +19,20 @@ namespace GraphicalProgrammingLanguage
         Canvas can;
         Boolean d;
         Boolean fill = false;
+        Boolean loopflag = false;
         Boolean runCommand = true;
-        int variableCount = 0;
+        int variableCount, programCounter, loopCounter, loopSize, iterations = 0;
         ArrayList variables = new ArrayList();
         ArrayList variableValues = new ArrayList();
+        ArrayList programs = new ArrayList();
+        String[] lines;
 
         /// <summary>
         /// Takes the canvas context to make the right drawing calls.
         /// </summary>
         /// <param name="bIn">The canvas context.</param>
         public Parser(Canvas bIn)
-        {
+        {            
             this.can = bIn;
         }
 
@@ -53,6 +56,10 @@ namespace GraphicalProgrammingLanguage
                 if (runCommand == false)
                 {
                     return;
+                }
+                if (loopflag == true)
+                {
+                    loopSize++;
                 }
                 String command = commands[0];
                                
@@ -146,6 +153,11 @@ namespace GraphicalProgrammingLanguage
                             System.InvalidOperationException arg = new System.InvalidOperationException("missing parameter or X or Y position is outside of range of display");
                             throw arg;
                         }
+                    }
+                    else if (command.Equals("loop"))
+                    {
+                        iterations = parNums[0];
+                        loopflag = true;                        
                     }
                     else
                     {
@@ -241,8 +253,17 @@ namespace GraphicalProgrammingLanguage
                         {
                             throw new ApplicationException("invalid expression");
                         }                      
-
-                    }                    
+                    }                   
+                    else if (command.Equals("loop"))
+                    {
+                        int dex1 = variableSearch(pars[0]);
+                        if (dex1 >= 0)
+                        {
+                            string dex2 = (string)variableValues[dex1];                            
+                            iterations = int.Parse(dex2);
+                            loopflag = true;  
+                        }                                              
+                    }
                     else
                     {
                         throw new ArgumentOutOfRangeException("invalid parameter");
@@ -273,6 +294,15 @@ namespace GraphicalProgrammingLanguage
                 }
                 runCommand = true;
             }
+            else if (commands[0].Equals("endloop"))
+            {
+                loopflag = false;
+                if (loopCounter < iterations - 1)
+                {
+                    loopCounter++;
+                    programCounter -= loopSize + 1;
+                }
+            }
             else
             {
                 throw new ArgumentNullException("Invalid command entered");
@@ -285,10 +315,16 @@ namespace GraphicalProgrammingLanguage
         /// <param name="input">A string of different commands.</param>
         public void ParseProgram(string input)
         {
-            String[] lines = input.Split("\n");
-            foreach (String line in lines)
+            lines = input.Split("\n");
+            //foreach (String line in lines)
+            //{
+            //    CommandParser(lines[programCounter]);
+            //    programCounter++;                            
+            //}
+            while (programCounter < lines.Length)
             {
-                CommandParser(line);
+                CommandParser(lines[programCounter]);
+                programCounter++;
             }
         }
 

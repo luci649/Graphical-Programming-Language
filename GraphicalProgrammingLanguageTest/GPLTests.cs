@@ -308,6 +308,9 @@ namespace GraphicalProgrammingLanguageTest
             Assert.AreEqual(2, p.variableSearch("b"));
         }
 
+        /// <summary>
+        /// Testing if 'if' statements ignores commands until after the endif command is called.
+        /// </summary>
         [TestMethod]
         public void TestIfStatements()
         {
