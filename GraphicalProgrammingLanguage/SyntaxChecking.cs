@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace GraphicalProgrammingLanguage
 {
-    internal class SyntaxChecking : Exception
+    public class SyntaxChecking : Exception
     {
 
+        public SyntaxChecking(string msg): base(msg)
+        {
+
+        }
     }
 }

@@ -12,8 +12,8 @@ namespace GraphicalProgrammingLanguage
     /// </summary>
     public class Canvas
     {        
-        Pen p;
-        Brush b;
+        Pen p = new Pen(Color.Black, 1);
+        Brush b = Brushes.Black;
         Color penColour;
         Form FormRefresh;
         Graphics g, point;

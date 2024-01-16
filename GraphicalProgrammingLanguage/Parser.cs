@@ -21,11 +21,13 @@ namespace GraphicalProgrammingLanguage
         Boolean fill = false;
         Boolean loopflag = false;
         Boolean runCommand = true;
-        int variableCount, programCounter, loopCounter, loopSize, iterations = 0;
+        Boolean methodFlag = false;
+        Boolean methodExecute = false;
+        String dex2S, dex1S;
+        int variableCount, programCounter, loopCounter, loopSize, iterations,dex1, dex2, methodCounter, saveProgramCounter;
         ArrayList variables = new ArrayList();
         ArrayList variableValues = new ArrayList();
         ArrayList programs = new ArrayList();
-        String[] lines;
 
         /// <summary>
         /// Takes the canvas context to make the right drawing calls.
@@ -215,7 +217,10 @@ namespace GraphicalProgrammingLanguage
                             var dt = new DataTable();
                             try 
                             {
-                                variableValues[conInt1] = dt.Compute(expression, ""); 
+                                variableValues[conInt1] = dt.Compute(expression, "");
+                                int j = (int)variableValues[conInt1];
+                                variableValues[conInt1] = j.ToString();
+                                return;
                             }
                             catch(System.Data.EvaluateException) 
                             {
@@ -256,13 +261,59 @@ namespace GraphicalProgrammingLanguage
                     }                   
                     else if (command.Equals("loop"))
                     {
-                        int dex1 = variableSearch(pars[0]);
+                        dex1 = variableSearch(pars[0]);
                         if (dex1 >= 0)
                         {
-                            string dex2 = (string)variableValues[dex1];                            
-                            iterations = int.Parse(dex2);
+                            dex1S = (string)variableValues[dex1];                            
+                            iterations = int.Parse(dex1S);
                             loopflag = true;  
                         }                                              
+                    }
+                    else if (command.Equals("moveto"))
+                    {
+                        dex1 = variableSearch(pars[0]);
+                        dex2 = variableSearch(pars[1]);
+                        if (dex1 >= 0 || dex2 >= 0)
+                        {
+                            dex1S = (string)variableValues[dex1];
+                            dex2S = (string)variableValues[dex2];
+                            can.MoveTo(int.Parse(dex1S),int.Parse(dex2S));
+                        }                        
+                    }
+                    else if (command.Equals("drawto"))
+                    {
+                        dex1 = variableSearch(pars[0]);
+                        dex2 = variableSearch(pars[1]);
+                        if (dex1 >= 0 || dex2 >= 0)
+                        {
+                            dex1S = (string)variableValues[dex1];
+                            dex2S = (string)variableValues[dex2];
+                            can.DrawLine(int.Parse(dex1S), int.Parse(dex2S));
+                        }
+                    }
+                    else if (command.Equals("circle"))
+                    {
+                        dex1 = variableSearch(pars[0]);
+                        if (dex1 >= 0)
+                        {                            
+                            dex1S = (string)variableValues[dex1];
+                            can.DrawCircle(int.Parse(dex1S));                           
+                        }
+                    }
+                    else if (command.Equals("rectangle"))
+                    {
+                        dex1 = variableSearch(pars[0]);
+                        dex2 = variableSearch(pars[1]);
+                        if (dex1 >= 0 || dex2 >= 0)
+                        {
+                            dex1S = (string)variableValues[dex1];
+                            dex2S = (string)variableValues[dex2];
+                            can.DrawRectangle(int.Parse(dex1S), int.Parse(dex2S));
+                        }
+                    }
+                    else if (command.Equals("method"))
+                    {
+                        
                     }
                     else
                     {
@@ -315,12 +366,8 @@ namespace GraphicalProgrammingLanguage
         /// <param name="input">A string of different commands.</param>
         public void ParseProgram(string input)
         {
-            lines = input.Split("\n");
-            //foreach (String line in lines)
-            //{
-            //    CommandParser(lines[programCounter]);
-            //    programCounter++;                            
-            //}
+            String[] lines = input.Split("\n");
+           
             while (programCounter < lines.Length)
             {
                 CommandParser(lines[programCounter]);
