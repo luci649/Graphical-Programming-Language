@@ -355,5 +355,26 @@ namespace GraphicalProgrammingLanguageTest
             Assert.AreNotEqual(23, x);
             Assert.AreNotEqual(70, y);
         }
+
+        [TestMethod]
+        public void TestMethod() 
+        {
+            //Arrange
+            Canvas test = new Canvas();
+            Parser p = new Parser(test);
+
+            //Act
+            p.ParseProgram("method j\r\ndrawto 20,90\r\ncircle 59\r\nendmethod");
+
+            //Arrange
+            int x = test.Xpos;
+            int y = test.Ypos;
+
+            //Assert
+            Assert.AreEqual(0, x);
+            Assert.AreEqual(0, y);
+            Assert.AreNotEqual(20, x);
+            Assert.AreNotEqual(90, y);           
+        }
     }
 }
