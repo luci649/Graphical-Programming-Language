@@ -213,15 +213,17 @@ namespace GraphicalProgrammingLanguage
                     {
                         if (commands.Contains("+") || commands.Contains("-") || commands.Contains("%") || commands.Contains("/") || commands.Contains("*"))
                         {
+                            int resultInt = variableSearch(commands[0]);
                             int conInt1 = variableSearch(commands[2]);
                             string conStr1 = (string)variableValues[conInt1];
+                            string resultStr = (string)variableValues[resultInt];
                             string expression = conStr1 + commands[3] + commands[4];
                             var dt = new DataTable();
                             try 
                             {
-                                variableValues[conInt1] = dt.Compute(expression, "");
-                                int j = (int)variableValues[conInt1];
-                                variableValues[conInt1] = j.ToString();
+                                variableValues[resultInt] = dt.Compute(expression, "");
+                                int j = (int)variableValues[resultInt];
+                                variableValues[resultInt] = j.ToString();
                                 return;
                             }
                             catch(System.Data.EvaluateException) 
@@ -269,7 +271,11 @@ namespace GraphicalProgrammingLanguage
                             dex1S = (string)variableValues[dex1];                            
                             iterations = int.Parse(dex1S);
                             loopflag = true;  
-                        }                                              
+                        }
+                        else
+                        {
+                            throw new ArgumentOutOfRangeException("invalid parameter");
+                        }
                     }
                     else if (command.Equals("moveto"))
                     {
@@ -280,7 +286,11 @@ namespace GraphicalProgrammingLanguage
                             dex1S = (string)variableValues[dex1];
                             dex2S = (string)variableValues[dex2];
                             can.MoveTo(int.Parse(dex1S),int.Parse(dex2S));
-                        }                        
+                        }
+                        else
+                        {
+                            throw new ArgumentOutOfRangeException("invalid parameter");
+                        }
                     }
                     else if (command.Equals("drawto"))
                     {
@@ -292,6 +302,10 @@ namespace GraphicalProgrammingLanguage
                             dex2S = (string)variableValues[dex2];
                             can.DrawLine(int.Parse(dex1S), int.Parse(dex2S));
                         }
+                        else
+                        {
+                            throw new ArgumentOutOfRangeException("invalid parameter");
+                        }
                     }
                     else if (command.Equals("circle"))
                     {
@@ -300,6 +314,10 @@ namespace GraphicalProgrammingLanguage
                         {                            
                             dex1S = (string)variableValues[dex1];
                             can.DrawCircle(int.Parse(dex1S));                           
+                        }
+                        else
+                        {
+                            throw new ArgumentOutOfRangeException("invalid parameter");
                         }
                     }
                     else if (command.Equals("rectangle"))
@@ -311,6 +329,10 @@ namespace GraphicalProgrammingLanguage
                             dex1S = (string)variableValues[dex1];
                             dex2S = (string)variableValues[dex2];
                             can.DrawRectangle(int.Parse(dex1S), int.Parse(dex2S));
+                        }
+                        else
+                        {
+                            throw new ArgumentOutOfRangeException("invalid parameter");
                         }
                     }
                     else if (command.Equals("method"))
@@ -398,6 +420,7 @@ namespace GraphicalProgrammingLanguage
                 throw new ArgumentNullException("Invalid command entered");
             }
         }
+
         /// <summary>
         /// Parses through multiple lines of commands passed through the rich text box by splitting them at their new lines and then have 
         /// each line's individual corresponding method executed one at a time.

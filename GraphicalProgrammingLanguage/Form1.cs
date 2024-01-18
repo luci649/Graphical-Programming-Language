@@ -85,22 +85,29 @@ namespace GraphicalProgrammingLanguage
                 e.SuppressKeyPress = true;
                 if (SingleCommand.Text.Equals("run"))
                 {
-                    try
+                    if (MultiCommand.Text != "" && MultiCommand2.Text != "")
                     {
-                        pars.ParseProgram(MultiCommand.Text);
+                        Run();
                     }
-                    catch (ArgumentOutOfRangeException)
+                    else
                     {
-                        MultiCommand.Text = "to many parameters entered";
-                    }
-                    catch (ArgumentNullException)
-                    {
-                        MultiCommand.Text = "Invalid command entered";
-                    }
-                    catch (InvalidOperationException)
-                    {
-                        MultiCommand.Text = "missing parameter or X or Y position is outside of range of display";
-                    }
+                           try
+                        {
+                            pars.ParseProgram(MultiCommand.Text);
+                        }
+                        catch (ArgumentOutOfRangeException)
+                        {
+                            MultiCommand.Text = "to many parameters entered";
+                        }
+                        catch (ArgumentNullException)
+                        {
+                            MultiCommand.Text = "Invalid command entered";
+                        }
+                        catch (InvalidOperationException)
+                        {
+                            MultiCommand.Text = "missing parameter or X or Y position is outside of range of display";
+                        } 
+                    }                    
                 }
                 else if (SingleCommand.Text.Equals("save"))
                 {
@@ -187,7 +194,7 @@ namespace GraphicalProgrammingLanguage
                     pars.ProgramCounter = 0;
                     pars.LoopCounter = 0;
                     pars.LoopSize = 0;
-                    await Task.Delay(5000);                    
+                    await Task.Delay(10000);                    
                     break;
                 }
             }
@@ -209,7 +216,7 @@ namespace GraphicalProgrammingLanguage
                     pars.ProgramCounter = 0;
                     pars.LoopCounter = 0;
                     pars.LoopSize = 0;
-                    await Task.Delay(5000);                   
+                    await Task.Delay(10000);                   
                     break;
                 }
             }

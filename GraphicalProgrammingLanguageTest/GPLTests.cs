@@ -379,5 +379,29 @@ namespace GraphicalProgrammingLanguageTest
             Assert.AreNotEqual(20, x);
             Assert.AreNotEqual(90, y);           
         }
+
+        /// <summary>
+        /// Testing functionality of being able to assign a variable with another variable in an expression. 
+        /// </summary>
+        [TestMethod]
+        public void TestExpression() 
+        {
+            //Arrange
+            Canvas test = new Canvas();
+            Parser p = new Parser(test);
+
+            //Act
+            p.ParseProgram("var size\r\nvar count\r\nsize = 2\r\ncount = 5\r\nsize = count * 10\r\nmoveto size,count");
+
+            //Arrange
+            int x = test.Xpos;
+            int y = test.Ypos;
+
+            //Assert
+            Assert.AreEqual(50, x);
+            Assert.AreEqual(5, y);
+            Assert.AreNotEqual(2, x);
+            Assert.AreNotEqual(0, y);
+        }
     }
 }
