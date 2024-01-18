@@ -24,7 +24,8 @@ namespace GraphicalProgrammingLanguage
         Boolean methodFlag = false;
         Boolean methodExecute = false;
         String dex2S, dex1S;
-        int variableCount, programCounter, loopCounter, loopSize, iterations,dex1, dex2, methodCounter, saveProgramCounter;
+        int variableCount,  loopCounter, loopSize, iterations,dex1, dex2, methodCounter, saveProgramCounter;
+        int programCounter;
         ArrayList variables = new ArrayList();
         ArrayList variableValues = new ArrayList();
         ArrayList methodNames = new ArrayList();
@@ -438,6 +439,11 @@ namespace GraphicalProgrammingLanguage
             return -1;
         }
 
+        /// <summary>
+        /// This method is used to search the list of methods to determine if it is in the list of methods.
+        /// </summary>
+        /// <param name="meth">method that is being searched for.</param>
+        /// <returns>Either the index of the passed method or -1 if not found.</returns>
         public int methodSearch(String meth)
         {
             for (int i = 0; i < methodCounter; i++)
@@ -449,6 +455,26 @@ namespace GraphicalProgrammingLanguage
             }
             return -1;
         }
+
+        /// <summary>
+        /// Property for setting the programcounter variable.
+        /// </summary>
+        public int ProgramCounter 
+        {
+            set{ programCounter = value; }
+        }
+
+        /// <summary>
+        ///  Property for setting the loopcounter variable.
+        /// </summary>
+        public int LoopCounter
+        { set { loopCounter = value; } }
+
+        /// <summary>
+        ///  Property for setting the loopsize variable.
+        /// </summary>
+        public int LoopSize
+        { set { loopSize = value; } }
     }
 }
 

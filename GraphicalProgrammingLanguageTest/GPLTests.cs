@@ -356,6 +356,9 @@ namespace GraphicalProgrammingLanguageTest
             Assert.AreNotEqual(70, y);
         }
 
+        /// <summary>
+        /// Testing if declaring a method will run command in method block.
+        /// </summary>
         [TestMethod]
         public void TestMethod() 
         {
