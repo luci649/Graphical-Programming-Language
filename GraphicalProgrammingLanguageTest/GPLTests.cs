@@ -316,7 +316,8 @@ namespace GraphicalProgrammingLanguageTest
         {
             //Arrange
             Canvas test = new();
-            Parser p = new Parser(test);
+            Parser p = new Parser(test);         
+           
 
             //Act
             p.ParseProgram("var x\nvar a\nx = 3\na = 5\nif a < x\ndrawto 50,30\nendif\ndrawto 90,70");
@@ -352,6 +353,30 @@ namespace GraphicalProgrammingLanguageTest
             //Assert
             Assert.AreEqual(13, x);
             Assert.AreEqual(60, y);
+            Assert.AreNotEqual(23, x);
+            Assert.AreNotEqual(70, y);
+            
+        }
+
+        /// <summary>
+        /// Testing loop command while using a variable as the parameter. 
+        /// </summary>
+        [TestMethod]
+        public void TestLoop2() 
+        {
+            //Arrange
+            Canvas test = new Canvas();
+            Parser p = new Parser(test);            
+
+            //Act
+            p.ParseProgram("var x\r\nvar d\r\nx = 20\r\nd = 2\r\nmoveto 20,50\r\nloop d\r\ncircle x\r\nx = x + 10\r\nendloop");
+
+            //Arrange
+            int x = test.Xpos;
+            int y = test.Ypos;
+            //Assert
+            Assert.AreEqual(20, x);
+            Assert.AreEqual(50, y);
             Assert.AreNotEqual(23, x);
             Assert.AreNotEqual(70, y);
         }
