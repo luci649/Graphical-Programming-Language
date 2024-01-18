@@ -374,6 +374,7 @@ namespace GraphicalProgrammingLanguageTest
             //Arrange
             int x = test.Xpos;
             int y = test.Ypos;
+
             //Assert
             Assert.AreEqual(20, x);
             Assert.AreEqual(50, y);
